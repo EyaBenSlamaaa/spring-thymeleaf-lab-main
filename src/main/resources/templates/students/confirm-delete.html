@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm Delete</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        h1 {
+            color: #e74c3c;
+        }
+        .info {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .btn-delete {
+            background-color: #e74c3c;
+        }
+        .btn-cancel {
+            background-color: #95a5a6;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Confirm Deletion</h1>
+
+    <div class="info">
+        <p>Are you sure you want to delete the following student?</p>
+        <p><strong>Name:</strong> <span th:text="${student.name}">John Doe</span></p>
+        <p><strong>Email:</strong> <span th:text="${student.email}">john@example.com</span></p>
+        <p><strong>Major:</strong> <span th:text="${student.major}">Computer Science</span></p>
+    </div>
+
+    <div>
+        <a th:href="@{/students/delete/{index}(index=${index})}" class="btn btn-delete">Delete</a>
+        <a th:href="@{/students/list}" class="btn btn-cancel">Cancel</a>
+    </div>
+</div>
+</body>
+</html>

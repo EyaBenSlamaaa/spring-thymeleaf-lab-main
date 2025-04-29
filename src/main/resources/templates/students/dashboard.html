@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        h1 {
+            color: #3498db;
+        }
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .stat-card {
+            flex: 1;
+            min-width: 250px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .stat-card h2 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #3498db;
+        }
+        .chart-container {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .chart-bar {
+            height: 30px;
+            background-color: #3498db;
+            margin-bottom: 10px;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        .chart-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .chart-label span:first-child {
+            font-weight: bold;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        .empty-message {
+            font-style: italic;
+            color: #777;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Student Dashboard</h1>
+
+    <div th:if="${totalStudents == 0}" class="empty-message">
+        <p>No student data available. Please register some students to see statistics.</p>
+    </div>
+
+    <div th:unless="${totalStudents == 0}">
+        <div class="stats-container">
+            <div class="stat-card">
+                <h2>Total Students</h2>
+                <div class="stat-value" th:text="${totalStudents}">0</div>
+            </div>
+            <div class="stat-card">
+                <h2>Total Majors</h2>
+                <div class="stat-value" th:text="${majorStats.size()}">0</div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <h2>Students per Major</h2>
+
+            <div th:each="entry : ${majorStats}">
+                <div class="chart-label">
+                    <span th:text="${entry.key}">Major</span>
+                    <span th:text="${entry.value}">0</span>
+                </div>
+                <div class="chart-bar" th:style="'width: ' + ${(entry.value * 100) / totalStudents} + '%'"></div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <a th:href="@{/students/list}" class="btn">View Student List</a>
+        <a th:href="@{/}" class="btn">Back to Home</a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Spring MVC with Thymeleaf</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        h1 {
+            color: #3498db;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        .navigation {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .search-form {
+            margin-bottom: 20px;
+        }
+        .search-form input[type="text"] {
+            padding: 8px;
+            width: 200px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .search-form select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .search-form button {
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .search-form button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Home Page</h1>
+    <p th:text="${message}">Default message</p>
+
+    <h2>Spring MVC with Thymeleaf Demo</h2>
+    <p>This application demonstrates the basic concepts of Spring MVC and Thymeleaf.</p>
+
+    <!-- Formulaire de recherche -->
+    <form th:action="@{/students/list}" method="get" class="search-form">
+        <label for="search">Search Students:</label>
+        <input type="text" id="search" name="search" placeholder="Enter search term" />
+        <select name="searchBy" id="searchBy">
+            <option value="">All Fields</option>
+            <option value="name">Name</option>
+            <option value="major">Major</option>
+        </select>
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Navigation -->
+    <nav class="navigation">
+        <a th:href="@{/students/list}" class="btn">View Students</a>
+        <a th:href="@{/students/register}" class="btn">Register Student</a>
+        <a th:href="@{/students/dashboard}" class="btn">Dashboard</a>
+    </nav>
+</div>
+</body>
+</html>
